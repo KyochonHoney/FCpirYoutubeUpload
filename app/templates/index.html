@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PIR 업로더</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <h1>PIR 영상 업로더</h1>
+      <form method="post" action="/logout"><button class="ghost" type="submit">로그아웃</button></form>
+    </div>
+
+    <div class="yt top" id="yt"></div>
+
+    <label class="drop" id="drop">
+      <input id="file" type="file" accept="video/*,.mp4,.mov,.m4v,.mkv,.avi,.webm,.mts" multiple hidden>
+      <div class="drop-big">영상을 여기에 끌어놓거나 눌러서 선택</div>
+      <div class="drop-sub">여러 개를 한 번에 올릴 수 있어요 · 촬영 시작시간 순으로 자동 정렬됩니다</div>
+    </label>
+
+    <div id="queue"></div>
+
+    <div class="listhead" id="listhead" hidden>
+      <div><b id="count">0</b>개 · 총 <span id="total"></span></div>
+      <button class="ghost" id="sortTime" type="button">시작시간순 정렬</button>
+    </div>
+    <div class="hint" id="hint" hidden>카드를 끌어서 순서를 바꾸거나, 왼쪽 번호를 직접 고치세요.</div>
+    <ul id="list"></ul>
+
+    <div class="card" id="publish" hidden>
+      <label for="title">유튜브 제목</label>
+      <input id="title" type="text">
+      <div class="hint">기본값은 가장 이른 촬영일 기준 <code>YYYYMMDD PIR풋</code> 입니다.</div>
+      <label for="privacy">공개 설정</label>
+      <select id="privacy">
+        <option value="private">비공개</option>
+        <option value="unlisted">일부 공개 (링크가 있는 사람만)</option>
+        <option value="public">공개</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="encode"> 안전 모드: 항상 재인코딩 (느리지만 영상 끊김 방지)</label>
+      <button class="go" id="go" type="button">병합 후 유튜브에 업로드</button>
+      <button class="go sec" id="preview" type="button">병합만 하고 미리 보기</button>
+    </div>
+
+    <div class="card" id="job" hidden>
+      <div class="jobhead"><b id="jobStage"></b><span id="jobPct"></span></div>
+      <div class="bar big"><i id="jobBar"></i></div>
+      <div class="qmsg" id="jobMsg"></div>
+      <video id="jobVideo" controls playsinline preload="metadata" hidden></video>
+      <div id="jobReady" hidden>
+        <button class="go" id="jobUpload" type="button">이 영상으로 유튜브에 업로드</button>
+        <button class="ghost" id="jobDiscard" type="button">버리기</button>
+      </div>
+      <div id="jobDone" hidden>
+        <a id="jobLink" class="btn" target="_blank" rel="noopener">유튜브에서 보기</a>
+        <button class="ghost" id="jobReset" type="button">새 작업 시작</button>
+      </div>
+    </div>
+  </div>
+  <script src="/static/Sortable.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

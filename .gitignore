@@ -1,0 +1,31 @@
+# --- 비밀 정보 (절대 커밋 금지) ---
+.env
+.env.*
+!.env.example
+client_secret*.json
+token.json
+*.pem
+*.key
+
+# --- 업로드/병합된 영상 및 임시 파일 ---
+storage/
+uploads/
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.m4v
+*.mts
+*.log
+
+# --- 예전 Flask 프로토타입 (더 이상 사용 안 함) ---
+/app.py
+
+# --- 환경/캐시 ---
+.venv/
+venv/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
